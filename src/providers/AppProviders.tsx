@@ -9,6 +9,8 @@ import "@fontsource/roboto/700.css";
 import "../styles/index.css";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { SnackbarProvider } from "notistack";
+import ErrorToast from "src/components/ErrorToast/ErrorToast";
 
 interface IAppProviders {
   children: JSX.Element;
@@ -36,10 +38,11 @@ const AppProviders: FC<IAppProviders> = (props) => {
     <BrowserRouter basename={"/"}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={darkTheme}>
-          <>
+          <SnackbarProvider>
+            <ErrorToast />
             <CssBaseline />
             {props.children}
-          </>
+          </SnackbarProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </BrowserRouter>

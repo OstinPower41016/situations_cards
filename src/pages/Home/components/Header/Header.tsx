@@ -10,11 +10,13 @@ import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
 import { getUserMeApi, updateUserNickNameApi } from "../../api/users.api";
 import QueriesKeys from "src/constants/queriesKeys";
+import { useSnackbar } from "notistack";
 
 interface IHeader {}
 
 const Header: FC<IHeader> = (props) => {
   const [nickName, setNickName] = React.useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const [updateUserErrorMsg, setUpdateUserErrorMsg] = React.useState<string>();
 
@@ -31,8 +33,8 @@ const Header: FC<IHeader> = (props) => {
     mutationFn: updateUserNickNameApi,
     onSuccess: () => {
       userMe.refetch();
+      enqueueSnackbar("Никнейм успешно обновлен", { variant: "success" });
     },
-
     onError: (error) => {
       // @ts-ignore
       setUpdateUserErrorMsg(error?.response?.data?.message);
@@ -79,6 +81,7 @@ const Header: FC<IHeader> = (props) => {
                 helperText={getInputHelperText()}
                 variant="standard"
                 error={!!updateUserErrorMsg}
+                focused
                 onBlur={onUpdateUserNickName}
                 onInput={clearErrorMsg}
               />
