@@ -1,0 +1,17 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	border: none;
+
+	font: inherit;
+	text-align: left;
+
+	background-color: transparent;
+	color: inherit;
+	border-spacing: 0;
+
+  font-family: "Roboto";
+}
+
