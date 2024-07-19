@@ -9,7 +9,7 @@ import "@fontsource/roboto/700.css";
 import "../styles/index.css";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider, SnackbarProviderProps } from "notistack";
 import ErrorToast from "src/components/ErrorToast/ErrorToast";
 
 interface IAppProviders {
@@ -38,7 +38,7 @@ const AppProviders: FC<IAppProviders> = (props) => {
     <BrowserRouter basename={"/"}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={darkTheme}>
-          <SnackbarProvider>
+          <SnackbarProvider autoHideDuration={3000}>
             <ErrorToast />
             <CssBaseline />
             {props.children}

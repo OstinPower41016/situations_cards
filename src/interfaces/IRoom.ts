@@ -1,3 +1,5 @@
+import { IUser } from "./IUser";
+
 export enum RoomStatus {
   PENDING = "pending",
   ACTIVE = "active",
@@ -14,7 +16,7 @@ export interface IRoom {
 
   private: boolean;
 
-  participants: string[];
+  participants: IUser[];
 
   status: RoomStatus;
 }

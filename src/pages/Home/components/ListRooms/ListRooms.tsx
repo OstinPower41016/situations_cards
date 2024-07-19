@@ -22,16 +22,21 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useMutation, useQuery } from "react-query";
 import QueriesKeys from "src/constants/queriesKeys";
-import { getUserMeApi } from "../../api/users.api";
-import { addUserToRoomApi, removeUserFromRoomApi } from "../../api/rooms.api";
+import { getUserMeApi } from "../../api/user.api";
+import { addUserToRoomApi, removeUserFromRoomApi } from "../../api/room.api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./ListRooms.css"; // Add CSS for the animations
+import { useNavigate } from "react-router-dom";
 
 interface IListRooms {}
 
 const ListRooms: FC<IListRooms> = (props) => {
-  const listRooms = useSocketData<IRoom[]>({ topic: "rooms" });
+  const navigate = useNavigate();
+
+  const listRooms = useSocketData<IRoom[]>({
+    topic: "rooms",
+  });
 
   const removeUserFromRoom = useMutation({
     mutationFn: removeUserFromRoomApi,
@@ -51,7 +56,7 @@ const ListRooms: FC<IListRooms> = (props) => {
       return false;
     }
 
-    return room.participants.includes(userMe.data?.id);
+    return room.participants?.map((user) => user.id).includes(userMe.data?.id);
   };
 
   const getButtonExitEnterText = (isCurrentRoomIncludesUser: boolean) => {
@@ -63,6 +68,8 @@ const ListRooms: FC<IListRooms> = (props) => {
       <TransitionGroup component={null}>
         {listRooms?.map((room) => {
           const isCurrentRoomIncludesUser = isUserInRoom(room);
+          const isVisibleNavigateToLobbyButton =
+            isCurrentRoomIncludesUser && room.participants.length >= 3;
 
           const onRemoveUserFromRoom = (e: React.MouseEvent) => {
             e.stopPropagation();
@@ -99,7 +106,7 @@ const ListRooms: FC<IListRooms> = (props) => {
                           spacing={1}
                         >
                           <CustomBadge
-                            badgeContent={room.participants.length}
+                            badgeContent={room.participants?.length ?? 0}
                             color={"primary"}
                           >
                             <AccountCircleIcon fontSize="small" />
@@ -131,8 +138,12 @@ const ListRooms: FC<IListRooms> = (props) => {
                         >
                           {getButtonExitEnterText(isCurrentRoomIncludesUser)}
                         </Button>
-                        {isCurrentRoomIncludesUser && (
-                          <Button variant="contained" size="small">
+                        {isVisibleNavigateToLobbyButton && (
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={() => navigate(`/room/${room.id}`)}
+                          >
                             Перейти в лобби
                           </Button>
                         )}

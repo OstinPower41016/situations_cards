@@ -8,7 +8,10 @@ import {
 import React, { FC } from "react";
 import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
-import { getUserMeApi, updateUserNickNameApi } from "../../api/users.api";
+import {
+  getUserMeApi,
+  updateUserNickNameApi,
+} from "../../pages/Home/api/user.api";
 import QueriesKeys from "src/constants/queriesKeys";
 import { useSnackbar } from "notistack";
 

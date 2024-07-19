@@ -4,9 +4,7 @@ const socket = io(import.meta.env.VITE_API_SOCKET, {
   transports: ["websocket"],
 });
 
-socket.on("connect", () => {
-  socket.emit("rooms");
-});
+socket.on("connect", () => {});
 
 socket.on("error", (msg) => {
   console.error(msg);

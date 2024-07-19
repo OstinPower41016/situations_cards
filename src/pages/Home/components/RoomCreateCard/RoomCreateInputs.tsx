@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import React, { FC } from "react";
 import { useMutation } from "react-query";
-import { createRoomApi } from "../../api/rooms.api";
+import { createRoomApi } from "../../api/room.api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface IRoomCreateCard {}

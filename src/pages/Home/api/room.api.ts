@@ -5,7 +5,7 @@ export type TCreateRoomApi = (args: { body: IRoomCreateDto }) => Promise<void>;
 
 export const createRoomApi: TCreateRoomApi = async (args) => {
   try {
-    const res = await apiClient.post(`rooms/create`, args.body);
+    const res = await apiClient.post(`room/create`, args.body);
 
     return res.data;
   } catch (error) {
@@ -19,7 +19,7 @@ export type TAddUserToRoomApi = (args: {
 
 export const addUserToRoomApi: TAddUserToRoomApi = async (args) => {
   try {
-    const res = await apiClient.patch(`rooms/${args.path.roomId}/add-user`);
+    const res = await apiClient.patch(`room/${args.path.roomId}/add-user`);
 
     return res.data;
   } catch (error) {
@@ -33,7 +33,7 @@ export type TRemoveUserFromRoomApi = (args: {
 
 export const removeUserFromRoomApi: TRemoveUserFromRoomApi = async (args) => {
   try {
-    const res = await apiClient.patch(`rooms/${args.path.roomId}/remove-user`);
+    const res = await apiClient.patch(`room/${args.path.roomId}/remove-user`);
 
     return res.data;
   } catch (error) {
