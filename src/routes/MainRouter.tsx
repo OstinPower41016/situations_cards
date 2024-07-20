@@ -26,9 +26,10 @@ export default MainRouter;
 const Page = styled.div`
   display: grid;
   grid-template-areas:
-    "header header header"
-    "main main main"
-    "footer footer footer";
+    "header"
+    "main"
+    "footer";
+  grid-template-rows: 90px 1fr auto;
 
   min-height: 100vh;
 `;

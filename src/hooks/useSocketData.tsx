@@ -1,9 +1,11 @@
 import React from "react";
 import socket from "src/config/socket/socket";
 
-type THook = () => [];
-
-const useSocketData = <T,>(args: { topic: string }) => {
+const useSocketData = <T,>(args: {
+  topic: string;
+  emitTopic?: string;
+  data?: Record<string, any>;
+}) => {
   const [socketData, setSocketData] = React.useState<T>();
 
   React.useEffect(() => {
@@ -11,7 +13,7 @@ const useSocketData = <T,>(args: { topic: string }) => {
       setSocketData(data);
     });
 
-    socket.emit(args.topic);
+    socket.emit(args.emitTopic ?? args.topic, args.data);
   }, []);
 
   return socketData;
