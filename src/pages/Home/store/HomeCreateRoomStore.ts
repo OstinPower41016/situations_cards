@@ -1,15 +1,15 @@
 import { makeAutoObservable } from "mobx";
 
 class HomeCreateRoomStore {
-  isVisibleCreateRoomInputs = false;
+	isVisibleCreateRoomInputs = false;
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-  setIsVisibleCreateRoomInputs = () => {
-    this.isVisibleCreateRoomInputs = true;
-  };
+	setIsVisibleCreateRoomInputs = () => {
+		this.isVisibleCreateRoomInputs = true;
+	};
 }
 
 export default new HomeCreateRoomStore();

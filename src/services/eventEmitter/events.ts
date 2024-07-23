@@ -1,5 +1,5 @@
 enum Events {
-  "apiError" = "apiError",
+	"apiError" = "apiError",
 }
 
 export default Events;

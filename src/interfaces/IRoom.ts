@@ -1,22 +1,17 @@
+import { IGameDto } from "./IGame";
 import { IUser } from "./IUser";
 
-export enum RoomStatus {
-  PENDING = "pending",
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-}
+type TRoomStatus = "CREATED" | "READY_TO_START" | "IN_GAME" | "INACTIVE";
 
 export interface IRoomCreateDto {
-  name: string;
+	name: string;
 }
 
 export interface IRoom {
-  id: string;
-  name: string;
-
-  private: boolean;
-
-  participants: IUser[];
-
-  status: RoomStatus;
+	id: string;
+	name: string;
+	private: boolean;
+	status: TRoomStatus;
+	users: IUser[];
+	game?: IGameDto | null;
 }

@@ -4,39 +4,35 @@ import { IRoom, IRoomCreateDto } from "src/interfaces/IRoom";
 export type TCreateRoomApi = (args: { body: IRoomCreateDto }) => Promise<void>;
 
 export const createRoomApi: TCreateRoomApi = async (args) => {
-  try {
-    const res = await apiClient.post(`room/create`, args.body);
+	try {
+		const res = await apiClient.post("room/create", args.body);
 
-    return res.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
+		return res.data;
+	} catch (error) {
+		return Promise.reject(error);
+	}
 };
 
-export type TAddUserToRoomApi = (args: {
-  path: { roomId: string };
-}) => Promise<IRoom>;
+export type TAddUserToRoomApi = (args: { path: { roomId: string } }) => Promise<IRoom>;
 
 export const addUserToRoomApi: TAddUserToRoomApi = async (args) => {
-  try {
-    const res = await apiClient.patch(`room/${args.path.roomId}/add-user`);
+	try {
+		const res = await apiClient.patch(`room/${args.path.roomId}/add-user`);
 
-    return res.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
+		return res.data;
+	} catch (error) {
+		return Promise.reject(error);
+	}
 };
 
-export type TRemoveUserFromRoomApi = (args: {
-  path: { roomId: string };
-}) => Promise<IRoom>;
+export type TRemoveUserFromRoomApi = (args: { path: { roomId: string } }) => Promise<IRoom>;
 
 export const removeUserFromRoomApi: TRemoveUserFromRoomApi = async (args) => {
-  try {
-    const res = await apiClient.patch(`room/${args.path.roomId}/remove-user`);
+	try {
+		const res = await apiClient.patch(`room/${args.path.roomId}/remove-user`);
 
-    return res.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
+		return res.data;
+	} catch (error) {
+		return Promise.reject(error);
+	}
 };

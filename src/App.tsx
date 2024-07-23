@@ -1,15 +1,15 @@
-import MainRouter from "./routes/MainRouter";
-import AppProviders from "./providers/AppProviders";
 import useDisconnect from "./config/socket/hooks/useDisconnect";
+import AppProviders from "./providers/AppProviders";
+import MainRouter from "./routes/MainRouter";
 
 function App() {
-  useDisconnect();
+	useDisconnect();
 
-  return (
-    <AppProviders>
-      <MainRouter />
-    </AppProviders>
-  );
+	return (
+		<AppProviders>
+			<MainRouter />
+		</AppProviders>
+	);
 }
 
 export default App;

@@ -1,22 +1,30 @@
 import React from "react";
+
 import socket from "src/config/socket/socket";
 
 const useSocketData = <T,>(args: {
-  topic: string;
-  emitTopic?: string;
-  data?: Record<string, any>;
+	topic: string;
+	emitTopic?: string;
+	// @ts-ignore
+	data?: Record<string, any>;
+	enabled?: boolean;
 }) => {
-  const [socketData, setSocketData] = React.useState<T>();
+	const { enabled = true } = args;
 
-  React.useEffect(() => {
-    socket.on(args.topic, (data) => {
-      setSocketData(data);
-    });
+	const [socketData, setSocketData] = React.useState<T>();
 
-    socket.emit(args.emitTopic ?? args.topic, args.data);
-  }, []);
+	React.useEffect(() => {
+		if (!enabled) {
+			return;
+		}
+		socket.on(args.topic, (data) => {
+			setSocketData(data);
+		});
 
-  return socketData;
+		socket.emit(args.emitTopic ?? args.topic, args.data);
+	}, [enabled]);
+
+	return socketData;
 };
 
 export default useSocketData;

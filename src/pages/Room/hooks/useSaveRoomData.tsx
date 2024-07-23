@@ -1,46 +1,48 @@
 import React from "react";
+
+import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
+import { updateUserNickNameApi } from "src/api/api.user";
 import useSocketData from "src/hooks/useSocketData";
 import { IRoom } from "src/interfaces/IRoom";
+
 import RoomStore from "../store/Room.store";
-import { updateUserNickNameApi } from "src/api/api.user";
-import { useMutation } from "react-query";
+import { UserStatus } from "src/interfaces/allTypes";
 
 const useCurrentRoomData = () => {
-  let { roomId } = useParams();
-  const room = useSocketData<IRoom>({
-    topic: `room/${roomId}`,
-    emitTopic: "room",
-    data: { roomId },
-  });
+	const { roomId } = useParams();
+	const room = useSocketData<IRoom>({
+		topic: `room/${roomId}`,
+		data: { roomId },
+	});
 
-  const updateUser = useMutation({
-    mutationFn: updateUserNickNameApi,
-  });
+	const updateUser = useMutation({
+		mutationFn: updateUserNickNameApi,
+	});
 
-  React.useEffect(() => {
-    updateUser.mutateAsync({
-      body: {
-        status: "READY_TO_START",
-      },
-    });
+	React.useEffect(() => {
+		updateUser.mutateAsync({
+			body: {
+				status: UserStatus.IN_LOBBY,
+			},
+		});
 
-    return () => {
-      updateUser.mutateAsync({
-        body: {
-          status: "ONLINE",
-        },
-      });
+		return () => {
+			updateUser.mutateAsync({
+				body: {
+					status: UserStatus.ONLINE,
+				},
+			});
 
-      RoomStore.setRoom(undefined);
-    };
-  }, []);
+			RoomStore.setRoom(undefined);
+		};
+	}, []);
 
-  React.useEffect(() => {
-    RoomStore.setRoom(room);
-  }, [room]);
+	React.useEffect(() => {
+		RoomStore.setRoom(room);
+	}, [room]);
 
-  return room;
+	return room;
 };
 
 export default useCurrentRoomData;

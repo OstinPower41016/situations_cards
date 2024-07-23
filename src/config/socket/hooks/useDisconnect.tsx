@@ -1,14 +1,16 @@
 import React from "react";
+
 import socket from "../socket";
 
 const useDisconnect = () => {
-  React.useEffect(() => {
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+	React.useEffect(
+		() => () => {
+			socket.disconnect();
+		},
+		[],
+	);
 
-  return null;
+	return null;
 };
 
 export default useDisconnect;
