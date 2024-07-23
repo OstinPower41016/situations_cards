@@ -11,7 +11,7 @@ const Question: FC<IQuestion> = (props) => {
 
 	return (
 		<Container>
-			<Typography>{leaderGame?.nickname} выбирает вопрос ...</Typography>
+			{leaderGame && <Typography>{leaderGame?.nickname} выбирает вопрос ...</Typography>}
 			<Box height={20} />
 			<QuestionsContainer>
 				{GameStore.game?.questions?.map((question) => {

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Box, Chip, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Chip, CircularProgress, ListItem, ListItemText, Typography, circularProgressClasses } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 
@@ -8,6 +8,7 @@ import RoomStore from "../store/Room.store";
 import getUserGameStatusText from "../utils/getUserGameStatusText";
 import GameStore from "../store/Game.store";
 import { GameUserStatus, UserStatus } from "src/interfaces/allTypes";
+import DoneIcon from "@mui/icons-material/Done";
 
 interface IParticipants {}
 
@@ -43,6 +44,8 @@ function renderRow(props: ListChildComponentProps) {
 	const { index, style } = props;
 	const user: { roomStatus: UserStatus; nickname: string; gameStatus: GameUserStatus; score: number } = props.data[index];
 
+	const userGameStatusIsWaittingOtherPersons = user.gameStatus === GameUserStatus.WAITING || user.gameStatus === GameUserStatus.READY;
+
 	const getColorNickname = () => {
 		if (user.roomStatus === UserStatus.IN_LOBBY) {
 			return "white";
@@ -55,7 +58,21 @@ function renderRow(props: ListChildComponentProps) {
 			<Typography>{user.score}</Typography>
 			<Box width={10} />
 			<ListItemText primary={<Typography color={getColorNickname()}>{user.nickname}</Typography>} />
-			<Chip label={getUserGameStatusText(user.gameStatus)} variant="filled" color="success" size="small" />
+			{user.gameStatus && (
+				<Chip
+					label={getUserGameStatusText(user.gameStatus)}
+					variant="filled"
+					color={userGameStatusIsWaittingOtherPersons ? "success" : "info"}
+					icon={
+						userGameStatusIsWaittingOtherPersons ? (
+							<DoneIcon />
+						) : (
+							<CircularProgress color="info" size={14} style={{ marginRight: "2px", marginLeft: "10px" }} />
+						)
+					}
+					size="small"
+				/>
+			)}
 		</ListItem>
 	);
 }

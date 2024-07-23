@@ -16,15 +16,15 @@ const useSaveGameData: THook = () => {
 
 	const game = useSocketData<IGameDto>({
 		topic: `game/${GameStore.gameId}`,
-		emitTopic: "getGame",
+		emitTopic: "joinGame",
 		data: { gameId: GameStore.gameId },
 		enabled: !!GameStore.gameId,
 	});
 
 	const userGame = useSocketData<IUserGameDto>({
 		topic: `game/userGame/${userMe.data?.id}`,
-		emitTopic: "getUserGame",
-		enabled: !!userMe.data?.id,
+		emitTopic: "joinUserToGame",
+		enabled: !!userMe.data?.id && !!game,
 	});
 
 	React.useEffect(() => {
