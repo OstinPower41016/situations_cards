@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { getUserMeApi } from "src/api/api.user";
 import QueriesKeys from "src/constants/queriesKeys";
 import { IGameDto, IUserGameDto } from "src/interfaces/IGame";
+import RoomStore from "../store/Room.store";
 
 type THook = () => [];
 
@@ -15,16 +16,16 @@ const useSaveGameData: THook = () => {
 	});
 
 	const game = useSocketData<IGameDto>({
-		topic: `game/${GameStore.gameId}`,
+		topic: `game/${RoomStore.room?.id}`,
 		emitTopic: "joinGame",
-		data: { gameId: GameStore.gameId },
-		enabled: !!GameStore.gameId,
+		data: { roomId: RoomStore.room?.id },
+		enabled: !!RoomStore.room?.id,
 	});
 
 	const userGame = useSocketData<IUserGameDto>({
 		topic: `game/userGame/${userMe.data?.id}`,
 		emitTopic: "joinUserToGame",
-		enabled: !!userMe.data?.id && !!game,
+		enabled: !!game?.id && !!userMe.data?.id,
 	});
 
 	React.useEffect(() => {

@@ -10,5 +10,7 @@ export default (status: keyof typeof GameUserStatus) => {
 			return "Выбирает ответ";
 		case "CHOOSING_QUESTION":
 			return "Выбирает вопрос";
+		case "CHOOSING_BEST_ANSWER":
+			return "Выбирает лучший ответ";
 	}
 };

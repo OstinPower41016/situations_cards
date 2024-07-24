@@ -19,12 +19,14 @@ const StartButton: FC<IStartButton> = (props) => {
 		queryKey: [QueriesKeys.userMe],
 	});
 
+	// const isLeader = userMe.data?.isLeader
+
 	const startGame = useMutation({
 		mutationFn: () => gameStartApi({ body: { roomId: RoomStore.room!.id } }),
 	});
 
 	const isRoomReadyToStart = RoomStore.room?.status === "READY_TO_START";
-	const isVisibleButton = !GameStore.game;
+	const isVisibleButton = RoomStore.room?.users[0].id === userMe.data?.id && !GameStore.game;
 
 	const isDisabledButton = !isRoomReadyToStart;
 

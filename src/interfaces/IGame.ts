@@ -5,6 +5,8 @@ export interface IGameDto {
 	questions: IQuestionEntity[];
 	round: number;
 	stage: GameStage;
+	selectedQuestion: IQuestionEntity;
+	selectedAnswers: IAnswerEntity[];
 	usersGame: {
 		id: string;
 		userId: string;
@@ -18,4 +20,7 @@ export interface IGameDto {
 export interface IUserGameDto {
 	id: string;
 	answers: IAnswerEntity[];
+	isLeader: boolean;
+	selectedAnswer: IAnswerEntity;
+	gameId: string;
 }

@@ -28,12 +28,11 @@ const Participants: FC<IParticipants> = (props) => {
 		<Box
 			style={{
 				borderLeft: "1px solid white",
-				padding: "10px 12px",
+				padding: "0px 12px 12px",
 				// borderRadius: "8px",
-				margin: "10px 12px",
+				margin: "0px 12px 12px",
 			}}>
-			<Typography>Участники:</Typography>
-			<FixedSizeList height={400} width={300} itemSize={50} itemCount={data?.length ?? 0} itemData={data}>
+			<FixedSizeList height={400} width={350} itemSize={50} itemCount={data?.length ?? 0} itemData={data}>
 				{renderRow}
 			</FixedSizeList>
 		</Box>
@@ -44,7 +43,7 @@ function renderRow(props: ListChildComponentProps) {
 	const { index, style } = props;
 	const user: { roomStatus: UserStatus; nickname: string; gameStatus: GameUserStatus; score: number } = props.data[index];
 
-	const userGameStatusIsWaittingOtherPersons = user.gameStatus === GameUserStatus.WAITING || user.gameStatus === GameUserStatus.READY;
+	const userGameStatusIsWaitingOtherPersons = user.gameStatus === GameUserStatus.WAITING || user.gameStatus === GameUserStatus.READY;
 
 	const getColorNickname = () => {
 		if (user.roomStatus === UserStatus.IN_LOBBY) {
@@ -57,14 +56,20 @@ function renderRow(props: ListChildComponentProps) {
 		<ListItem style={style} key={index} component="div" disablePadding>
 			<Typography>{user.score}</Typography>
 			<Box width={10} />
-			<ListItemText primary={<Typography color={getColorNickname()}>{user.nickname}</Typography>} />
+			<ListItemText
+				primary={
+					<Typography style={{ width: "130px", overflow: "hidden", textOverflow: "ellipsis" }} color={getColorNickname()}>
+						{user.nickname}
+					</Typography>
+				}
+			/>
 			{user.gameStatus && (
 				<Chip
 					label={getUserGameStatusText(user.gameStatus)}
 					variant="filled"
-					color={userGameStatusIsWaittingOtherPersons ? "success" : "info"}
+					color={userGameStatusIsWaitingOtherPersons ? "success" : "info"}
 					icon={
-						userGameStatusIsWaittingOtherPersons ? (
+						userGameStatusIsWaitingOtherPersons ? (
 							<DoneIcon />
 						) : (
 							<CircularProgress color="info" size={14} style={{ marginRight: "2px", marginLeft: "10px" }} />

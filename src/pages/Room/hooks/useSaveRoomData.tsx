@@ -13,6 +13,7 @@ const useCurrentRoomData = () => {
 	const { roomId } = useParams();
 	const room = useSocketData<IRoom>({
 		topic: `room/${roomId}`,
+		emitTopic: "joinToRoom",
 		data: { roomId },
 	});
 
