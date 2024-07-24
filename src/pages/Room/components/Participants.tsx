@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Box, Chip, CircularProgress, ListItem, ListItemText, Typography, circularProgressClasses } from "@mui/material";
+import { Box, Chip, CircularProgress, ListItem, ListItemText, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 
@@ -13,23 +13,24 @@ import DoneIcon from "@mui/icons-material/Done";
 interface IParticipants {}
 
 const Participants: FC<IParticipants> = (props) => {
-	const data = RoomStore.room?.users.map((user) => {
-		const userGame = GameStore.game?.usersGame.find((userGame) => userGame.userId === user.id);
+	const data = RoomStore.room?.users
+		.map((user) => {
+			const userGame = GameStore.game?.usersGame.find((userGame) => userGame.userId === user.id);
 
-		return {
-			roomStatus: user.status,
-			nickname: user.nickname,
-			gameStatus: userGame?.status,
-			score: userGame?.scrore,
-		};
-	});
+			return {
+				roomStatus: user.status,
+				nickname: user.nickname,
+				gameStatus: userGame?.status,
+				score: userGame?.score,
+			};
+		})
+		?.sort((a, b) => (b.score ?? 0) - (a.score ?? 0)); // TODO sorting on backend already exist
 
 	return (
 		<Box
 			style={{
 				borderLeft: "1px solid white",
 				padding: "0px 12px 12px",
-				// borderRadius: "8px",
 				margin: "0px 12px 12px",
 			}}>
 			<FixedSizeList height={400} width={350} itemSize={50} itemCount={data?.length ?? 0} itemData={data}>

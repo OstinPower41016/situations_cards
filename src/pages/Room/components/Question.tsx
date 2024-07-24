@@ -97,6 +97,7 @@ const CustomPaper = styled(Paper)<{ $isSelectedQuestion: boolean }>`
 	padding: 20px;
 
 	transition: all 0.5s;
+	cursor: pointer;
 
 	${(props) => {
 		if (props.$isSelectedQuestion) {

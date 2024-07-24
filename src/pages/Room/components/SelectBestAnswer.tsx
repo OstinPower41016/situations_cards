@@ -4,16 +4,36 @@ import styled, { css } from "styled-components";
 import GameStore from "../store/Game.store";
 import { observer } from "mobx-react-lite";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useMutation } from "react-query";
+import { selectBestAnswerApi } from "../api/game.api";
+import RoomStore from "../store/Room.store";
 
 interface ISelectBestAnswer {}
 
 const SelectBestAnswer: FC<ISelectBestAnswer> = (props) => {
-	const onSelectAnswer = (args: any) => {};
+	const selectBestAnswer = useMutation({
+		mutationFn: selectBestAnswerApi,
+	});
+
+	const onSelectAnswer = (args: { answerId: string }) => {
+		const roomId = RoomStore.room?.id;
+
+		if (!roomId) {
+			throw new Error("Room must be specified");
+		}
+
+		selectBestAnswer.mutateAsync({
+			body: {
+				answerId: args.answerId,
+				roomId: roomId,
+			},
+		});
+	};
 
 	return (
 		<TransitionGroup component={Container}>
 			{GameStore.game?.selectedAnswers?.map((answer) => {
-				const isSelectedAnswer = answer.id === GameStore.userGame?.selectedAnswer?.id;
+				const isSelectedAnswer = answer.id === GameStore.game?.winnerAnswer?.id;
 
 				return (
 					<CSSTransition key={answer.id} timeout={500} classNames="question">
@@ -53,6 +73,7 @@ const Container = styled.div`
 const Card = styled(Paper)<{ $isSelectedAnswer: boolean }>`
 	padding: 20px;
 	transition: all 0.5s;
+	cursor: pointer;
 
 	${(props) => {
 		if (props.$isSelectedAnswer) {

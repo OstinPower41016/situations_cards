@@ -57,6 +57,7 @@ const Container = styled.div`
 const Card = styled(Paper)<{ $isSelectedAnswer: boolean }>`
 	padding: 20px;
 	transition: all 0.5s;
+	cursor: pointer;
 
 	${(props) => {
 		if (props.$isSelectedAnswer) {

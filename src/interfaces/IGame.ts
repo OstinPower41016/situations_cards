@@ -1,4 +1,4 @@
-import { GameStage, GameUserStatus, IAnswerEntity, IQuestionEntity } from "./allTypes";
+import { GameStage, GameUserStatus, IAnswerEntity, IQuestionEntity, IUserGameEntity } from "./allTypes";
 
 export interface IGameDto {
 	id: string;
@@ -7,12 +7,14 @@ export interface IGameDto {
 	stage: GameStage;
 	selectedQuestion: IQuestionEntity;
 	selectedAnswers: IAnswerEntity[];
+	winner: IUserGameEntity;
+	winnerAnswer: IAnswerEntity;
 	usersGame: {
 		id: string;
 		userId: string;
 		nickname: string;
 		isLeader: boolean;
-		scrore: number;
+		score: number;
 		status: GameUserStatus;
 	}[];
 }

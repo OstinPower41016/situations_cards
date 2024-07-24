@@ -35,3 +35,15 @@ export const selectAnswerApi: TSelectAnswerApi = async (args) => {
 		return Promise.reject(error);
 	}
 };
+
+export type TSelectBestAnswerApi = (args: { body: { answerId: string; roomId: string } }) => Promise<void>;
+
+export const selectBestAnswerApi: TSelectBestAnswerApi = async (args) => {
+	try {
+		const res = await apiClient.patch(`game/select-best-answer`, args.body);
+
+		return res.data;
+	} catch (error) {
+		return Promise.reject(error);
+	}
+};
