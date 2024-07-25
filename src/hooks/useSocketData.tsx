@@ -8,21 +8,28 @@ const useSocketData = <T,>(args: {
 	// @ts-ignore
 	data?: Record<string, any>;
 	enabled?: boolean;
+	dependencies?: any;
 }) => {
 	const { enabled = true } = args;
 
 	const [socketData, setSocketData] = React.useState<T>();
 
+	const onSocketReceivedData = (data: any) => {
+		setSocketData(data);
+	};
+
 	React.useEffect(() => {
 		if (!enabled) {
 			return;
 		}
-		socket.on(args.topic, (data) => {
-			setSocketData(data);
-		});
+		socket.on(args.topic, onSocketReceivedData);
 
 		socket.emit(args.emitTopic ?? args.topic, args.data);
-	}, [enabled]);
+
+		return () => {
+			socket.off(args.topic, onSocketReceivedData);
+		};
+	}, [enabled, args.dependencies]);
 
 	return socketData;
 };

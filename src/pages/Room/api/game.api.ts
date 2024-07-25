@@ -47,3 +47,15 @@ export const selectBestAnswerApi: TSelectBestAnswerApi = async (args) => {
 		return Promise.reject(error);
 	}
 };
+
+export type TNextRoundApi = (args: { body: { gameId: string } }) => Promise<void>;
+
+export const nextRoundApi: TNextRoundApi = async (args) => {
+	try {
+		const res = await apiClient.patch(`game/next-round`, args.body);
+
+		return res.data;
+	} catch (error) {
+		return Promise.reject(error);
+	}
+};

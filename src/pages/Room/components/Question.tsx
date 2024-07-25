@@ -1,15 +1,15 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styled, { css } from "styled-components";
 import GameStore from "../store/Game.store";
 import { observer } from "mobx-react-lite";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { useMutation } from "react-query";
 import { selectGameQuestionApi } from "../api/game.api";
 import RoomStore from "../store/Room.store";
 import { IQuestionEntity } from "src/interfaces/allTypes";
-import { toJS } from "mobx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import SelectBestAnswer from "./SelectBestAnswer";
+import Winner from "./Winner";
 
 interface IQuestion {}
 
@@ -20,6 +20,10 @@ const Question: FC<IQuestion> = (props) => {
 
 	const onClickQuestionCard = (question: IQuestionEntity) => {
 		const roomId = RoomStore.room?.id;
+
+		if (!GameStore.userGame?.isLeader) {
+			return;
+		}
 
 		if (!roomId) {
 			throw new Error("Room must be specified");
@@ -37,22 +41,25 @@ const Question: FC<IQuestion> = (props) => {
 		<>
 			<Container>
 				<Box height={20} />
-				<TransitionGroup component={QuestionsContainer}>
-					{GameStore.game?.questions?.map((question) => {
-						const isSelectedQuestion = question.id === GameStore.game?.selectedQuestion?.id;
+				<QuestionWinnerContainer>
+					<TransitionGroup component={QuestionsContainer}>
+						{GameStore.game?.questions?.map((question) => {
+							const isSelectedQuestion = question.id === GameStore.game?.selectedQuestion?.id;
 
-						if (GameStore.game?.selectedQuestion && GameStore.game?.selectedQuestion.id !== question.id) {
-							return <></>;
-						}
-						return (
-							<CSSTransition key={question.id} timeout={500} classNames="question">
-								<CustomPaper $isSelectedQuestion={isSelectedQuestion} elevation={24} onClick={() => onClickQuestionCard(question)}>
-									<p>{question.description}</p>
-								</CustomPaper>
-							</CSSTransition>
-						);
-					})}
-				</TransitionGroup>
+							if (GameStore.game?.selectedQuestion && GameStore.game?.selectedQuestion.id !== question.id) {
+								return <></>;
+							}
+							return (
+								<CSSTransition key={question.id} timeout={500} classNames="question">
+									<CustomPaper $isSelectedQuestion={isSelectedQuestion} elevation={24} onClick={() => onClickQuestionCard(question)}>
+										<p>{question.description}</p>
+									</CustomPaper>
+								</CSSTransition>
+							);
+						})}
+					</TransitionGroup>
+					<Winner />
+				</QuestionWinnerContainer>
 				{GameStore.game?.selectedAnswers && (
 					<>
 						<Box height={20} />
@@ -69,7 +76,6 @@ export default observer(Question);
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 0px;
 `;
 
 const QuestionsContainer = styled.div`
@@ -106,4 +112,9 @@ const CustomPaper = styled(Paper)<{ $isSelectedQuestion: boolean }>`
 			`;
 		}
 	}}
+`;
+
+const QuestionWinnerContainer = styled.div`
+	display: flex;
+	gap: 20px;
 `;

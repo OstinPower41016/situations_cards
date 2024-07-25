@@ -10,6 +10,7 @@ import GameStore from "./store/Game.store";
 import { toJS } from "mobx";
 import Question from "./components/Question";
 import Answers from "./components/Answers";
+import NextRound from "./components/NextRound";
 
 function Room() {
 	useSaveRoomData();
@@ -24,6 +25,7 @@ function Room() {
 			<Answers />
 			<ButtonStartContainer>
 				<StartButton />
+				<NextRound />
 			</ButtonStartContainer>
 		</Container>
 	);

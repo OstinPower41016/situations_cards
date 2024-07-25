@@ -7,7 +7,7 @@ export interface IGameDto {
 	stage: GameStage;
 	selectedQuestion: IQuestionEntity;
 	selectedAnswers: IAnswerEntity[];
-	winner: IUserGameEntity;
+	winnerUserGameId: string;
 	winnerAnswer: IAnswerEntity;
 	usersGame: {
 		id: string;

@@ -26,6 +26,7 @@ const useSaveGameData: THook = () => {
 		topic: `game/userGame/${userMe.data?.id}`,
 		emitTopic: "joinUserToGame",
 		enabled: !!game?.id && !!userMe.data?.id,
+		dependencies: GameStore.game?.round ?? 0,
 	});
 
 	React.useEffect(() => {
