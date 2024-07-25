@@ -30,6 +30,7 @@ import QueriesKeys from "src/constants/queriesKeys";
 import { IRoom } from "src/interfaces/IRoom";
 
 import { addUserToRoomApi, removeUserFromRoomApi } from "../../api/room.api";
+import React from "react";
 
 interface IListRooms {}
 
@@ -60,6 +61,8 @@ const ListRooms: FC<IListRooms> = (props) => {
 
 		return room.users?.map((user) => user.id).includes(userMe.data?.id);
 	};
+
+
 
 	const getButtonExitEnterText = (isCurrentRoomIncludesUser: boolean) =>
 		isCurrentRoomIncludesUser ? "Покинуть комнату" : "Войти в комнату";

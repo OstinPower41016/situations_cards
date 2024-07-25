@@ -78,7 +78,7 @@ const Card = styled(Paper)<{ $isSelectedAnswer: boolean }>`
 	${(props) => {
 		if (props.$isSelectedAnswer) {
 			return css`
-				box-shadow: 0px 0px 12px #0bffca;
+				box-shadow: 0px 0px 5px #0bffca;
 			`;
 		}
 	}}

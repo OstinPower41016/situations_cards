@@ -6,11 +6,14 @@ import styled, { css } from "styled-components";
 import { useMutation } from "react-query";
 import { selectAnswerApi } from "../api/game.api";
 import RoomStore from "../store/Room.store";
+import { GameStage } from "src/interfaces/allTypes";
+import { useSnackbar } from "notistack";
 
 interface IAnswers {}
 
 const Answers: FC<IAnswers> = (props) => {
 	const isLeader = GameStore.userGame?.isLeader;
+	const { enqueueSnackbar } = useSnackbar();
 
 	const selectAnswer = useMutation({
 		mutationFn: selectAnswerApi,
@@ -18,6 +21,11 @@ const Answers: FC<IAnswers> = (props) => {
 
 	const onSelectAnswer = (args: { answerId: string }) => {
 		const roomId = RoomStore.room?.id;
+
+		if (GameStore.game?.stage !== GameStage.SELECT_ANSWERS) {
+			enqueueSnackbar("Выбирать ответ можно в стадии выбора ответа", { variant: "info" });
+			return;
+		}
 
 		if (!roomId) {
 			throw new Error("Room must be specified");
@@ -62,7 +70,7 @@ const Card = styled(Paper)<{ $isSelectedAnswer: boolean }>`
 	${(props) => {
 		if (props.$isSelectedAnswer) {
 			return css`
-				box-shadow: 0px 0px 12px #0bffca;
+				box-shadow: 0px 0px 5px #0bffca;
 			`;
 		}
 	}}

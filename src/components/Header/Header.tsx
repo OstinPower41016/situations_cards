@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { AppBar, Button, CircularProgress, TextField, Toolbar } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useMutation, useQuery } from "react-query";
-import { getUserMeApi, updateUserNickNameApi } from "src/api/api.user";
+import { getUserMeApi, updateUserApi } from "src/api/api.user";
 import QueriesKeys from "src/constants/queriesKeys";
 import styled from "styled-components";
 
@@ -25,7 +25,7 @@ const Header: FC<IHeader> = (props) => {
 	});
 
 	const updateUser = useMutation({
-		mutationFn: updateUserNickNameApi,
+		mutationFn: updateUserApi,
 		onSuccess: () => {
 			userMe.refetch();
 			enqueueSnackbar("Никнейм успешно обновлен", { variant: "success" });

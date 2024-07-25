@@ -9,7 +9,6 @@ import getUserGameStatusText from "../utils/getUserGameStatusText";
 import GameStore from "../store/Game.store";
 import { GameUserStatus, UserStatus } from "src/interfaces/allTypes";
 import DoneIcon from "@mui/icons-material/Done";
-import { toJS } from "mobx";
 
 interface IParticipants {}
 

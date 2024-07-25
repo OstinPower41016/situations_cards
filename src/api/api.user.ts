@@ -2,9 +2,9 @@ import { IUserUpdateDto, IUser } from "src/interfaces/IUser";
 
 import apiClient from "./api.client";
 
-export type TUpdateUserNickNameApi = (args: { body: IUserUpdateDto }) => Promise<IUser>;
+export type TUpdateUserApi = (args: { body: IUserUpdateDto }) => Promise<IUser>;
 
-export const updateUserNickNameApi: TUpdateUserNickNameApi = async (args) => {
+export const updateUserApi: TUpdateUserApi = async (args) => {
 	try {
 		const res = await apiClient.patch("/user/me/update", args.body);
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
-import { updateUserNickNameApi } from "src/api/api.user";
+import { updateUserApi } from "src/api/api.user";
 import useSocketData from "src/hooks/useSocketData";
 import { IRoom } from "src/interfaces/IRoom";
 
@@ -18,7 +18,7 @@ const useCurrentRoomData = () => {
 	});
 
 	const updateUser = useMutation({
-		mutationFn: updateUserNickNameApi,
+		mutationFn: updateUserApi,
 	});
 
 	React.useEffect(() => {

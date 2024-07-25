@@ -7,8 +7,11 @@ import ListRooms from "./components/ListRooms/ListRooms";
 import RoomCreateInputs from "./components/RoomCreateCard/RoomCreateInputs";
 import RoomsButtons from "./components/RoomsButtons/RoomsButtons";
 import HomeCreateRoomStore from "./store/HomeCreateRoomStore";
+import useUpdateUserStatus from "./hooks/useUpdateUserStatus";
 
 function Home() {
+	useUpdateUserStatus();
+
 	return (
 		<>
 			<Box height={100} />
