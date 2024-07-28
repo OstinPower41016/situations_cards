@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { IAnswer } from "src/interfaces/IAnswer";
 import { IGameDto, IUserGameDto } from "src/interfaces/IGame";
 
 class GameStore {

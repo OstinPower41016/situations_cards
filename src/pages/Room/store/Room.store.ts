@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { IRoom } from "src/interfaces/IRoom";
-import { IUser } from "src/interfaces/IUser";
+
 import GameStore from "./Game.store";
 
 class RoomStore {

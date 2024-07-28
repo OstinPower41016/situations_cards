@@ -1,16 +1,18 @@
-import { observer } from "mobx-react-lite";
 import { FC } from "react";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import styled from "styled-components";
-import GameStore from "../store/Game.store";
-import { GameStage } from "src/interfaces/allTypes";
+
 import { Button } from "@mui/material";
+import { observer } from "mobx-react-lite";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useMutation } from "react-query";
+import { GameStage } from "src/interfaces/allTypes";
+import styled from "styled-components";
+
 import { nextRoundApi } from "../api/game.api";
+import GameStore from "../store/Game.store";
 
 interface INextRound {}
 
-const NextRound: FC<INextRound> = (props) => {
+const NextRound: FC<INextRound> = () => {
 	const nextRound = useMutation({
 		mutationFn: nextRoundApi,
 	});

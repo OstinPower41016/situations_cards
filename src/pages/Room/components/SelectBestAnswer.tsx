@@ -1,16 +1,18 @@
+import { FC } from "react";
+
 import { Typography, Paper } from "@mui/material";
-import React, { FC } from "react";
-import styled, { css } from "styled-components";
-import GameStore from "../store/Game.store";
 import { observer } from "mobx-react-lite";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useMutation } from "react-query";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import styled, { css } from "styled-components";
+
 import { selectBestAnswerApi } from "../api/game.api";
+import GameStore from "../store/Game.store";
 import RoomStore from "../store/Room.store";
 
 interface ISelectBestAnswer {}
 
-const SelectBestAnswer: FC<ISelectBestAnswer> = (props) => {
+const SelectBestAnswer: FC<ISelectBestAnswer> = () => {
 	const selectBestAnswer = useMutation({
 		mutationFn: selectBestAnswerApi,
 	});

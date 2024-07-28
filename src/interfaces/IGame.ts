@@ -1,4 +1,4 @@
-import { GameStage, GameUserStatus, IAnswerEntity, IQuestionEntity, IUserGameEntity } from "./allTypes";
+import { GameStage, GameUserStatus, IAnswerEntity, IQuestionEntity } from "./allTypes";
 
 export interface IGameDto {
 	id: string;

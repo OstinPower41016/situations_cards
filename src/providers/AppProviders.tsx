@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import { BrowserRouter } from "react-router-dom";
 
@@ -9,10 +9,9 @@ import "@fontsource/roboto/700.css";
 
 import "../styles/index.css";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { SnackbarProvider, SnackbarProviderProps } from "notistack";
+import { SnackbarProvider } from "notistack";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ErrorToast from "src/components/ErrorToast/ErrorToast";
-import { red } from "@mui/material/colors";
 import palette from "src/config/theme/pallette";
 
 interface IAppProviders {

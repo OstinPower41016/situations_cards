@@ -1,12 +1,14 @@
 import { FC } from "react";
-import GameStore from "../store/Game.store";
+
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 
+import GameStore from "../store/Game.store";
+
 interface IWinner {}
 
-const Winner: FC<IWinner> = (props) => {
-	const winnerNickName = !!GameStore.game?.winnerUserGameId
+const Winner: FC<IWinner> = () => {
+	const winnerNickName = GameStore.game?.winnerUserGameId
 		? GameStore.game?.usersGame.find((ug) => ug.id === GameStore.game?.winnerUserGameId)?.nickname
 		: "";
 

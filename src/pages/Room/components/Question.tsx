@@ -1,19 +1,22 @@
 import { FC } from "react";
-import styled, { css } from "styled-components";
-import GameStore from "../store/Game.store";
-import { observer } from "mobx-react-lite";
+
 import { Box, Paper } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import { useMutation } from "react-query";
-import { selectGameQuestionApi } from "../api/game.api";
-import RoomStore from "../store/Room.store";
-import { IQuestionEntity } from "src/interfaces/allTypes";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { IQuestionEntity } from "src/interfaces/allTypes";
+import styled, { css } from "styled-components";
+
+import { selectGameQuestionApi } from "../api/game.api";
+import GameStore from "../store/Game.store";
+import RoomStore from "../store/Room.store";
+
 import SelectBestAnswer from "./SelectBestAnswer";
 import Winner from "./Winner";
 
 interface IQuestion {}
 
-const Question: FC<IQuestion> = (props) => {
+const Question: FC<IQuestion> = () => {
 	const selectQuestion = useMutation({
 		mutationFn: selectGameQuestionApi,
 	});

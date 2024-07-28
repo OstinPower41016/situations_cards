@@ -20,7 +20,7 @@ import { createRoomApi } from "../../api/room.api";
 
 interface IRoomCreateCard {}
 
-const RoomCreateCard: FC<IRoomCreateCard> = (props) => {
+const RoomCreateCard: FC<IRoomCreateCard> = () => {
 	const [roomName, setRoomName] = React.useState("");
 
 	const createRoom = useMutation(createRoomApi);

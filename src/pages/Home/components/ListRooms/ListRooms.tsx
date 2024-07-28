@@ -1,9 +1,7 @@
 import { FC } from "react";
 
-import useSocketData from "src/hooks/useSocketData";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Login from "@mui/icons-material/Login";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import {
@@ -12,29 +10,30 @@ import {
 	AccordionSummary,
 	Badge,
 	Button,
-	Grid,
 	IconButton,
-	List,
+	Link,
 	ListItem,
 	Paper,
 	Stack,
 	Typography,
-	styled,
 } from "@mui/material";
 import { useMutation, useQuery } from "react-query";
-import "./ListRooms.css"; // Add CSS for the animations
 import { useNavigate } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { getUserMeApi } from "src/api/api.user";
+import useSocketData from "src/hooks/useSocketData";
+import "./ListRooms.css"; // Add CSS for the animations
 import QueriesKeys from "src/constants/queriesKeys";
 import { IRoom } from "src/interfaces/IRoom";
+import styled from "styled-components";
 
 import { addUserToRoomApi, removeUserFromRoomApi } from "../../api/room.api";
+
 import React from "react";
 
 interface IListRooms {}
 
-const ListRooms: FC<IListRooms> = (props) => {
+const ListRooms: FC<IListRooms> = () => {
 	const navigate = useNavigate();
 
 	const listRooms = useSocketData<IRoom[]>({
@@ -62,14 +61,23 @@ const ListRooms: FC<IListRooms> = (props) => {
 		return room.users?.map((user) => user.id).includes(userMe.data?.id);
 	};
 
-
-
 	const getButtonExitEnterText = (isCurrentRoomIncludesUser: boolean) =>
 		isCurrentRoomIncludesUser ? "Покинуть комнату" : "Войти в комнату";
+
+	const isEmptyList = listRooms?.length === 0;
+
+
 
 	return (
 		<Content>
 			<TransitionGroup component={null}>
+				{isEmptyList && (
+					<EmptyListContainer>
+						<Typography textAlign={"center"}>
+							Пока не было создано ни одной комнаты, но вы можете <Link>создать первую</Link>
+						</Typography>
+					</EmptyListContainer>
+				)}
 				{listRooms?.map((room) => {
 					const isCurrentRoomIncludesUser = isUserInRoom(room);
 					const isVisibleNavigateToLobbyButton = isCurrentRoomIncludesUser && room.users.length >= 3;
@@ -143,20 +151,22 @@ const ListRooms: FC<IListRooms> = (props) => {
 
 export default ListRooms;
 
-const ContentItem = styled(Paper)(({ theme }) => ({
+const ContentItem = styled(Paper)(() => ({
 	textAlign: "center",
 	background: "transparent",
 	flexGrow: 1,
 	boxShadow: "0px 0px 4px 0px rgba(255,255,255,1)",
 }));
 
-const Content = styled(Paper)(({ theme }) => ({
-	...theme.typography.body2,
-	minHeight: "400px",
-	boxShadow: "0px 0px 4px 0px rgba(255,255,255,1)",
-}));
+const Content = styled.div`
+	height: 500px;
+	width: 400px;
+	border: 1px solid white;
+	border-radius: 8px;
+	background-color: #90caf917;
+`;
 
-const CustomBadge = styled(Badge)(({ theme }) => ({
+const CustomBadge = styled(Badge)(() => ({
 	"& .MuiBadge-badge": {
 		minWidth: "16px",
 		height: "16px",
@@ -167,4 +177,14 @@ const CustomBadge = styled(Badge)(({ theme }) => ({
 
 const CustomListItem = styled(ListItem)`
 	width: 400px;
+`;
+
+const EmptyListContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+
+	height: 100%;
+	width: 100%;
 `;

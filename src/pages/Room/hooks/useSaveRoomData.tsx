@@ -4,10 +4,10 @@ import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
 import { updateUserApi } from "src/api/api.user";
 import useSocketData from "src/hooks/useSocketData";
+import { UserStatus } from "src/interfaces/allTypes";
 import { IRoom } from "src/interfaces/IRoom";
 
 import RoomStore from "../store/Room.store";
-import { UserStatus } from "src/interfaces/allTypes";
 
 const useCurrentRoomData = () => {
 	const { roomId } = useParams();

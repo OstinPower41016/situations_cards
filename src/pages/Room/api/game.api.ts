@@ -4,7 +4,7 @@ export type TGameStartApi = (args: { body: { roomId: string } }) => Promise<void
 
 export const gameStartApi: TGameStartApi = async (args) => {
 	try {
-		const res = await apiClient.post(`game/start`, args.body);
+		const res = await apiClient.post("game/start", args.body);
 
 		return res.data;
 	} catch (error) {
@@ -16,7 +16,7 @@ export type TSelectGameQuestionApi = (args: { body: { questionId: string; roomId
 
 export const selectGameQuestionApi: TSelectGameQuestionApi = async (args) => {
 	try {
-		const res = await apiClient.patch(`game/select-question`, args.body);
+		const res = await apiClient.patch("game/select-question", args.body);
 
 		return res.data;
 	} catch (error) {
@@ -28,7 +28,7 @@ export type TSelectAnswerApi = (args: { body: { answerId: string; roomId: string
 
 export const selectAnswerApi: TSelectAnswerApi = async (args) => {
 	try {
-		const res = await apiClient.patch(`game/select-answer`, args.body);
+		const res = await apiClient.patch("game/select-answer", args.body);
 
 		return res.data;
 	} catch (error) {
@@ -40,7 +40,7 @@ export type TSelectBestAnswerApi = (args: { body: { answerId: string; roomId: st
 
 export const selectBestAnswerApi: TSelectBestAnswerApi = async (args) => {
 	try {
-		const res = await apiClient.patch(`game/select-best-answer`, args.body);
+		const res = await apiClient.patch("game/select-best-answer", args.body);
 
 		return res.data;
 	} catch (error) {
@@ -52,7 +52,7 @@ export type TNextRoundApi = (args: { body: { gameId: string } }) => Promise<void
 
 export const nextRoundApi: TNextRoundApi = async (args) => {
 	try {
-		const res = await apiClient.patch(`game/next-round`, args.body);
+		const res = await apiClient.patch("game/next-round", args.body);
 
 		return res.data;
 	} catch (error) {

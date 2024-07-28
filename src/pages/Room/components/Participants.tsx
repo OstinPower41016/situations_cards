@@ -1,18 +1,18 @@
 import { FC } from "react";
 
+import DoneIcon from "@mui/icons-material/Done";
 import { Box, Chip, CircularProgress, ListItem, ListItemText, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { GameUserStatus, UserStatus } from "src/interfaces/allTypes";
 
+import GameStore from "../store/Game.store";
 import RoomStore from "../store/Room.store";
 import getUserGameStatusText from "../utils/getUserGameStatusText";
-import GameStore from "../store/Game.store";
-import { GameUserStatus, UserStatus } from "src/interfaces/allTypes";
-import DoneIcon from "@mui/icons-material/Done";
 
 interface IParticipants {}
 
-const Participants: FC<IParticipants> = (props) => {
+const Participants: FC<IParticipants> = () => {
 	const data = RoomStore.room?.users
 		.map((user) => {
 			const userGame = GameStore.game?.usersGame.find((userGame) => userGame.userId === user.id);

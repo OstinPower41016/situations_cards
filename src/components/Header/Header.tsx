@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 interface IHeader {}
 
-const Header: FC<IHeader> = (props) => {
+const Header: FC<IHeader> = () => {
 	const [nickName, setNickName] = React.useState("");
 	const { enqueueSnackbar } = useSnackbar();
 

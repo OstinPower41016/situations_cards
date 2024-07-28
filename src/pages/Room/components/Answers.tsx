@@ -1,17 +1,19 @@
 import { FC } from "react";
-import GameStore from "../store/Game.store";
-import { observer } from "mobx-react-lite";
+
 import { Paper, Typography } from "@mui/material";
-import styled, { css } from "styled-components";
-import { useMutation } from "react-query";
-import { selectAnswerApi } from "../api/game.api";
-import RoomStore from "../store/Room.store";
-import { GameStage } from "src/interfaces/allTypes";
+import { observer } from "mobx-react-lite";
 import { useSnackbar } from "notistack";
+import { useMutation } from "react-query";
+import { GameStage } from "src/interfaces/allTypes";
+import styled, { css } from "styled-components";
+
+import { selectAnswerApi } from "../api/game.api";
+import GameStore from "../store/Game.store";
+import RoomStore from "../store/Room.store";
 
 interface IAnswers {}
 
-const Answers: FC<IAnswers> = (props) => {
+const Answers: FC<IAnswers> = () => {
 	const isLeader = GameStore.userGame?.isLeader;
 	const { enqueueSnackbar } = useSnackbar();
 

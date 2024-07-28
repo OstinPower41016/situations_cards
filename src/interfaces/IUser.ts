@@ -1,7 +1,7 @@
+import { UserStatus } from "./allTypes";
 import { IAnswer } from "./IAnswer";
 import { IQuestion } from "./IQuestion";
 import { IRoom } from "./IRoom";
-import { UserStatus } from "./allTypes";
 
 export interface IUser {
 	id: string;

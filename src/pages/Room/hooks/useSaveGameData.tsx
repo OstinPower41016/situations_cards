@@ -1,10 +1,12 @@
-import useSocketData from "src/hooks/useSocketData";
-import GameStore from "../store/Game.store";
 import React from "react";
+
 import { useQuery } from "react-query";
 import { getUserMeApi } from "src/api/api.user";
 import QueriesKeys from "src/constants/queriesKeys";
+import useSocketData from "src/hooks/useSocketData";
 import { IGameDto, IUserGameDto } from "src/interfaces/IGame";
+
+import GameStore from "../store/Game.store";
 import RoomStore from "../store/Room.store";
 
 type THook = () => [];

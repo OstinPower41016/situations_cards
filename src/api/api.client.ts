@@ -3,7 +3,7 @@ import eventEmitter from "src/services/eventEmitter/eventEmitter";
 import Events from "src/services/eventEmitter/events";
 
 const instance = axios.create({
-	baseURL: "http://localhost:3000/",
+	baseURL: import.meta.env.VITE_API_BACKEND,
 	withCredentials: true,
 });
 

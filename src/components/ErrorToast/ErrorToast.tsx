@@ -6,7 +6,7 @@ import Events from "src/services/eventEmitter/events";
 
 interface IErrorToast {}
 
-const ErrorToast: FC<IErrorToast> = (props) => {
+const ErrorToast: FC<IErrorToast> = () => {
 	const { enqueueSnackbar } = useSnackbar();
 
 	React.useEffect(() => {
