@@ -2,8 +2,9 @@ import axios from "axios";
 import eventEmitter from "src/services/eventEmitter/eventEmitter";
 import Events from "src/services/eventEmitter/events";
 
+console.log(import.meta.env.ENV )
 const instance = axios.create({
-	baseURL: import.meta.env.VITE_API_BACKEND,
+	baseURL: import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_BACKEND : `http://${window.location.hostname}`,
 	withCredentials: true,
 });
 
