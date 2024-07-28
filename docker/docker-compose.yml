@@ -3,7 +3,6 @@ version: "3.8"
 services:
   frontend:
     build: ../
-    env_file: "../.env.prod"
     volumes:
       - frontend_nginx_config:/usr/share/nginx/html/
     networks:
