@@ -3,7 +3,7 @@ import eventEmitter from "src/services/eventEmitter/eventEmitter";
 import Events from "src/services/eventEmitter/events";
 
 const instance = axios.create({
-	baseURL: import.meta.env.DEV ? import.meta.env.VITE_API_BACKEND : `http://${window.location.hostname}`,
+	baseURL: import.meta.env.DEV ? import.meta.env.VITE_API_BACKEND : `http://${window.location.hostname}/api`,
 	withCredentials: true,
 });
 
