@@ -7,25 +7,36 @@ import RoomCreateInputs from "./components/RoomCreateCard/RoomCreateInputs";
 import RoomsButtons from "./components/RoomsButtons/RoomsButtons";
 import useUpdateUserStatus from "./hooks/useUpdateUserStatus";
 import HomeCreateRoomStore from "./store/HomeCreateRoomStore";
+import Footer from "./components/Footer/Footer";
 
 function Home() {
 	useUpdateUserStatus();
 
 	return (
-		<>
-			<Box height={100} />
+		<Page>
+			{/* <Box height={100} />
 			<ContentContainer>
 				<RoomContainer>
 					<ListRooms />
 					{!HomeCreateRoomStore.isVisibleCreateRoomInputs && <RoomsButtons />}
 				</RoomContainer>
 				{HomeCreateRoomStore.isVisibleCreateRoomInputs && <RoomCreateInputs />}
-			</ContentContainer>
-		</>
+			</ContentContainer> */}
+			<div></div>
+			<Footer />
+		</Page>
 	);
 }
 
 export default observer(Home);
+
+const Page = styled.div`
+	background-color: #f7ffde;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
 
 // const Page = styled.div`
 // 	display: grid;

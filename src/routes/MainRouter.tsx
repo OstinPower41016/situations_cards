@@ -1,23 +1,21 @@
 import { FC } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import Header from "src/components/Header/Header";
 import styled from "styled-components";
 
 import Home from "../pages/Home/Home";
 import Room from "../pages/Room/Room";
+import Rules from "src/pages/Rules/Rules";
 
 interface IMainRouter {}
 
 const MainRouter: FC<IMainRouter> = () => (
 	<Page>
-		<Header />
-		<div style={{ gridArea: "main" }}>
-			<Routes>
-				<Route path="/" index element={<Home />} />
-				<Route path="/room/:roomId" element={<Room />} />
-			</Routes>
-		</div>
+		<Routes>
+			<Route path={"/rules"} index element={<Rules />} />
+			<Route path="/" element={<Home />} />
+			<Route path="/room/:roomId" element={<Room />} />
+		</Routes>
 	</Page>
 );
 
