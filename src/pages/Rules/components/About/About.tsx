@@ -53,17 +53,6 @@ const Container = styled.div`
 	gap: 3rem;
 `;
 
-const Header = styled.p`
-	font-size: 4rem;
-	font-weight: 900;
-`;
-
-const Subtitle = styled.p`
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-bottom: 24px;
-`;
-
 const TextBlock = styled.div``;
 
 const ParagraphContainer = styled.div`
